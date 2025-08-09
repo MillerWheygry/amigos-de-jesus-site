@@ -2,11 +2,14 @@
 
 const Index = () => {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="text-4xl font-bold mb-4">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      {/* Página estática em HTML/CSS/JS puros, hospedada em /public/aaj */}
+      <iframe
+        title="AMIGOS DE JESUS - Site Institucional"
+        src="/aaj/index.html"
+        className="w-full min-h-screen"
+        style={{ border: 0 }}
+      />
     </div>
   );
 };
