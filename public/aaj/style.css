@@ -7,17 +7,17 @@
 */
 
 :root {
-  /* Cores em HSL para fácil ajuste */
-  --aaj-primary: 215 80% 48%; /* Azul vivo e confiável */
-  --aaj-primary-600: 215 75% 42%;
-  --aaj-primary-700: 215 70% 38%;
+  /* Cores em HSL baseadas na logo (azul marinho e laranja) */
+  --aaj-primary: 220 80% 24%; /* Azul marinho */
+  --aaj-primary-600: 220 85% 22%;
+  --aaj-primary-700: 220 90% 18%;
   --aaj-bg: 0 0% 100%;
   --aaj-foreground: 222 22% 10%;
-  --aaj-muted: 215 20% 96%;
+  --aaj-muted: 220 20% 97%;
   --aaj-border: 220 14% 90%;
-  --aaj-accent: 46 85% 55%; /* Dourado */
-  --aaj-accent-600: 41 90% 50%;
-  --aaj-shadow: 215 80% 48% / 0.15;
+  --aaj-accent: 24 95% 52%; /* Laranja */
+  --aaj-accent-600: 24 100% 46%;
+  --aaj-shadow: 220 80% 24% / 0.18;
 
   --radius-sm: 8px;
   --radius-md: 12px;
@@ -50,8 +50,8 @@ img { max-width: 100%; display: block; height: auto; }
 .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: .75rem 0; }
 .brand { display: inline-flex; align-items: center; gap: .6rem; text-decoration: none; color: inherit; }
 .brand-logo { flex: 0 0 auto; }
+.brand-logo-img { width: 40px; height: 40px; object-fit: contain; border-radius: 50%; background: #fff; padding: 2px; box-shadow: 0 6px 14px -8px hsl(var(--aaj-shadow)); }
 .brand-name { font-weight: 700; letter-spacing: .5px; }
-
 .nav-toggle { display: inline-flex; flex-direction: column; justify-content: center; gap: 4px; width: 42px; height: 42px; border: 1px solid hsl(var(--aaj-border)); border-radius: 10px; background: #fff; cursor: pointer; padding: 8px; transition: transform .2s ease; }
 .nav-toggle:hover { transform: translateY(-1px); }
 .nav-toggle .bar { display: block; height: 2px; width: 100%; background: hsl(var(--aaj-foreground)); border-radius: 2px; }
@@ -71,7 +71,7 @@ img { max-width: 100%; display: block; height: auto; }
 
 /* Hero */
 .hero { position: relative; isolation: isolate; }
-.hero-media { position: absolute; inset: 0; background: url('/aaj/og-image.jpg') center/cover no-repeat; filter: saturate(110%); }
+.hero-media { position: absolute; inset: 0; background: url('./hero-1.jpg') center/cover no-repeat; filter: saturate(110%); transition: opacity .8s ease; }
 .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, hsl(var(--aaj-bg) / 0.0) 0%, hsl(var(--aaj-bg) / .15) 30%, hsl(var(--aaj-bg)) 100%); z-index: -1; }
 .hero-inner { padding: 5rem 0 3rem; text-align: center; }
 .hero-title { font-family: "Playfair Display", Georgia, serif; font-weight: 700; font-size: clamp(1.8rem, 3vw + 1rem, 3rem); line-height: 1.2; margin: 0 0 1rem; }

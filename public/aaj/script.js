@@ -101,3 +101,44 @@ const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
     }, 300);
   });
 })();
+
+// Slider do HERO (transição automática de imagens)
+(function heroSlider() {
+  const media = document.querySelector('.hero-media');
+  if (!media) return;
+
+  const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const images = ['./hero-1.jpg', './hero-2.jpg', './hero-3.jpg', './hero-4.jpg', './hero-5.jpg'];
+
+  // Preload de imagens
+  images.forEach((src) => { const i = new Image(); i.src = src; });
+
+  let i = 1; // começamos da segunda, pois a primeira já está no CSS
+  let timer;
+  const delay = 6000;
+
+  function showNext() {
+    if (reduceMotion) {
+      media.style.backgroundImage = `url('${images[i]}')`;
+      i = (i + 1) % images.length;
+      return;
+    }
+    media.style.opacity = '0';
+    setTimeout(() => {
+      media.style.backgroundImage = `url('${images[i]}')`;
+      media.style.opacity = '1';
+      i = (i + 1) % images.length;
+    }, 400);
+  }
+
+  function start() { stop(); timer = setInterval(showNext, delay); }
+  function stop() { if (timer) clearInterval(timer); }
+
+  // Inicia
+  start();
+
+  // Pausa quando a aba não estiver visível
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) stop(); else start();
+  });
+})();
