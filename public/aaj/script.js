@@ -107,37 +107,48 @@ const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
   const media = document.querySelector('.hero-media');
   if (!media) return;
 
+  // Garante transição suave
+  media.style.opacity = '1';
+  media.style.transition = 'opacity .8s ease';
+
   const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const images = ['./hero-1.jpg', './hero-2.jpg', './hero-3.jpg', './hero-4.jpg', './hero-5.jpg'];
+  if (images.length < 2) return;
 
-  // Preload de imagens
-  images.forEach((src) => { const i = new Image(); i.src = src; });
+  // Preload
+  images.forEach((src) => { const im = new Image(); im.src = src; });
 
-  let i = 1; // começamos da segunda, pois a primeira já está no CSS
+  let idx = 1; // a primeira já está via CSS
   let timer;
   const delay = 6000;
+  let transitioning = false;
 
   function showNext() {
+    if (transitioning) return;
+    transitioning = true;
+
     if (reduceMotion) {
-      media.style.backgroundImage = `url('${images[i]}')`;
-      i = (i + 1) % images.length;
+      media.style.backgroundImage = `url('${images[idx]}')`;
+      idx = (idx + 1) % images.length;
+      transitioning = false;
       return;
     }
+
     media.style.opacity = '0';
     setTimeout(() => {
-      media.style.backgroundImage = `url('${images[i]}')`;
+      media.style.backgroundImage = `url('${images[idx]}')`;
+      // força reflow para garantir a transição
+      void media.offsetHeight;
       media.style.opacity = '1';
-      i = (i + 1) % images.length;
+      idx = (idx + 1) % images.length;
+      setTimeout(() => { transitioning = false; }, 400);
     }, 400);
   }
 
   function start() { stop(); timer = setInterval(showNext, delay); }
   function stop() { if (timer) clearInterval(timer); }
 
-  // Inicia
   start();
-
-  // Pausa quando a aba não estiver visível
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) stop(); else start();
   });
