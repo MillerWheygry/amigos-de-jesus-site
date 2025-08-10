@@ -6,7 +6,7 @@ const Index = () => {
       {/* Página estática em HTML/CSS/JS puros, hospedada em /public/aaj */}
       <iframe
         title="AMIGOS DE JESUS - Site Institucional"
-        src="/aaj/index.html"
+        src="aaj/index.html"
         className="w-full min-h-screen"
         style={{ border: 0 }}
       />
