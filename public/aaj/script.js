@@ -112,11 +112,11 @@ const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
   media.style.transition = 'opacity .8s ease';
 
   const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  const images = ['./hero-1.jpg', './hero-2.jpg', './hero-3.jpg', './hero-4.jpg', './hero-5.jpg'];
+  const images = ['/aaj/hero-1.jpg', '/aaj/hero-2.jpg', '/aaj/hero-3.jpg', '/aaj/hero-4.jpg', '/aaj/hero-5.jpg'];
   if (images.length < 2) return;
 
   // Preload
-  images.forEach((src) => { const im = new Image(); im.src = src; });
+  images.forEach((src) => { const im = new Image(); im.onload = () => {}; im.onerror = () => console.warn('[AAJ] Falha ao carregar imagem do hero:', src); im.src = src; });
 
   let idx = 1; // a primeira já está via CSS
   let timer;
